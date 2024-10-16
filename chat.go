@@ -8,8 +8,10 @@ import (
 )
 
 type ChatMessage struct {
-	Name    string `json:"name"`
-	Message string `json:"string"`
+	UserID    string `json:"userID"`
+	Name      string `json:"name"`
+	Body      string `json:"body"`
+	MessageID string `json:"messageID"`
 }
 
 var upgrader = websocket.Upgrader{

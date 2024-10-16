@@ -3,7 +3,6 @@ package main
 import (
 	"encoding/json"
 	"fmt"
-	"log"
 	"net/http"
 )
 
@@ -44,13 +43,11 @@ func (broker *Broker) listen() {
 			// A new client has connected.
 			// Register their message channel
 			broker.clients[s] = true
-			log.Printf("Client added. %d registered clients", len(broker.clients))
 		case s := <-broker.closingClients:
 
 			// A client has dettached and we want to
 			// stop sending them messages.
 			delete(broker.clients, s)
-			log.Printf("Removed client. %d registered clients", len(broker.clients))
 		case event := <-broker.Notifier:
 
 			// We got a new event from the outside!
