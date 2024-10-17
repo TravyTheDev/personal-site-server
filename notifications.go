@@ -59,10 +59,6 @@ func (broker *Broker) listen() {
 	}
 }
 
-type Message struct {
-	Message string `json:"msg"`
-}
-
 func (broker *Broker) Stream(w http.ResponseWriter, r *http.Request) {
 	// Check if the ResponseWriter supports flushing.
 	flusher, ok := w.(http.Flusher)

@@ -7,13 +7,6 @@ import (
 	"github.com/gorilla/websocket"
 )
 
-type ChatMessage struct {
-	UserID    string `json:"userID"`
-	Name      string `json:"name"`
-	Body      string `json:"body"`
-	MessageID string `json:"messageID"`
-}
-
 var upgrader = websocket.Upgrader{
 	CheckOrigin: func(r *http.Request) bool {
 		return true
