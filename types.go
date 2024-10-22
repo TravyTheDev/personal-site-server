@@ -10,3 +10,10 @@ type ChatMessage struct {
 type Message struct {
 	Message string `json:"msg"`
 }
+
+type MessageWithSubtraction struct {
+	Message    string `json:"message"`
+	FirstNum   int    `json:"firstNum"`
+	SecondNum  int    `json:"secondNum"`
+	Difference int    `json:"difference"`
+}
