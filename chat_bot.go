@@ -4,7 +4,6 @@ import (
 	"context"
 	"encoding/json"
 	"fmt"
-	"log"
 	"net/http"
 	"os"
 
@@ -28,14 +27,14 @@ func (c *ChatBot) Chat(w http.ResponseWriter, r *http.Request) {
 
 	var input MessageWithSubtraction
 	if err := json.NewDecoder(r.Body).Decode(&input); err != nil {
-		log.Println("HERE", err)
+		fmt.Println(err)
 	}
 	if input.FirstNum-input.SecondNum != input.Difference {
 		return
 	}
 	client, err := genai.NewClient(c.ctx, option.WithAPIKey(apiKey))
 	if err != nil {
-		log.Println("HEY", err)
+		fmt.Println(err)
 	}
 	defer client.Close()
 	model := client.GenerativeModel("gemini-1.5-flash")
@@ -45,7 +44,7 @@ func (c *ChatBot) Chat(w http.ResponseWriter, r *http.Request) {
 
 	res, err := cs.SendMessage(c.ctx, genai.Text(input.Message))
 	if err != nil {
-		log.Println("HELLO", err)
+		fmt.Println(err)
 	}
 
 	userInput := genai.Content{
