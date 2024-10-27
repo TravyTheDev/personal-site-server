@@ -20,16 +20,17 @@ func main() {
 	broker := NewServer()
 	chatBot := NewChatBot()
 	router := mux.NewRouter()
+	subRouter := router.PathPrefix("/my_site_api").Subrouter()
 	c := cors.New(cors.Options{
 		AllowedOrigins:   []string{frontUrl},
 		AllowCredentials: true,
 		AllowedMethods:   []string{http.MethodGet, http.MethodPost, http.MethodDelete, http.MethodPut, http.MethodPatch},
 	})
 	handler := c.Handler(router)
-	router.HandleFunc("/messages", broker.BroadcastMessage).Methods("POST")
-	router.HandleFunc("/stream", broker.Stream).Methods("GET")
-	router.HandleFunc("/chat", HandleConnections)
-	router.HandleFunc("/chat_bot", chatBot.Chat).Methods("POST")
+	subRouter.HandleFunc("/messages", broker.BroadcastMessage).Methods("POST")
+	subRouter.HandleFunc("/stream", broker.Stream).Methods("GET")
+	subRouter.HandleFunc("/chat", HandleConnections)
+	subRouter.HandleFunc("/chat_bot", chatBot.Chat).Methods("POST")
 	go HandleMessages()
 
 	log.Println("Starting server on", port)
