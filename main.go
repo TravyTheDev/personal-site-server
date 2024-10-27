@@ -16,6 +16,7 @@ func main() {
 		log.Fatal("Error loading .env file")
 	}
 	frontUrl := os.Getenv("FRONT_URL")
+	port := os.Getenv("PORT")
 	broker := NewServer()
 	chatBot := NewChatBot()
 	router := mux.NewRouter()
@@ -31,6 +32,6 @@ func main() {
 	router.HandleFunc("/chat_bot", chatBot.Chat).Methods("POST")
 	go HandleMessages()
 
-	log.Println("Starting server on :8080")
-	log.Fatal(http.ListenAndServe(":8080", handler))
+	log.Println("Starting server on", port)
+	log.Fatal(http.ListenAndServe(port, handler))
 }
