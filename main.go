@@ -6,15 +6,14 @@ import (
 	"os"
 
 	"github.com/gorilla/mux"
-	"github.com/joho/godotenv"
 	"github.com/rs/cors"
 )
 
 func main() {
-	err := godotenv.Load()
-	if err != nil {
-		log.Fatal("Error loading .env file")
-	}
+	// err := godotenv.Load()
+	// if err != nil {
+	// 	log.Fatal("Error loading .env file")
+	// }
 	frontUrl := os.Getenv("FRONT_URL")
 	port := os.Getenv("PORT")
 	broker := NewServer()

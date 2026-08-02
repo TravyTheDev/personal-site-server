@@ -37,7 +37,7 @@ func (c *ChatBot) Chat(w http.ResponseWriter, r *http.Request) {
 		fmt.Println(err)
 	}
 	defer client.Close()
-	model := client.GenerativeModel("gemini-1.5-flash")
+	model := client.GenerativeModel("gemini-3-flash-preview")
 	cs := model.StartChat()
 
 	cs.History = history
